@@ -5,19 +5,82 @@ const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
 
+
+// Get single user details for Admin
+exports.getUserDetailsAdmin = catchAsyncErros(async (req, res, next) => {
+  const user = await User.findById({ _id: req.params.id });
+
+  return !user
+    ? next(new ErrorHandler("User not found!", 404))
+    : res.status(200).json({ success: true, user });
+});
+
+// Deleting user - Admin
+exports.deleteUser = catchAsyncErros(async (req, res, next) => {
+  // We will remove cloudinary later
+
+  const user = await User.findById({_id: req.params.id});
+
+  if (!user) return next(new ErrorHandler(`User does not exist with given ID`, 404));
+
+  await user.remove();
+
+  res.status(200).json({
+    success: true,
+    user
+  })
+})
+
+// Get all users
+exports.getAllUsers = catchAsyncErros(async (req, res, next) => {
+  const users = await User.find({});
+
+  res.status(200).json({
+    success: true,
+    users,
+  });
+});
+
+// Update profile
+exports.updateProfile = catchAsyncErros(async (req, res, next) => {
+  // Always defined this template kind of thing for updating instead of passing entire req.body
+  const newUserData = {
+    name: req.body.name,
+    email: req.body.email,
+    role: req.body.role,
+  };
+
+  // We will add cloudinary later
+
+  const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  // Note: Here the above method will return previous object to get the lastest one set new=true, to make it by default write mongoose.set('returnOriginal', false);
+
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
+
 // Update user password
 exports.updatePassword = catchAsyncErros(async (req, res, next) => {
   const user = await User.findById(req.user.id).select("+password");
 
   const isPasswordMatched = await user.comparePassword(req.body.oldPassword);
 
-  if (!isPasswordMatched) return next(new ErrorHandler("Old password do not match!", 400));
+  if (!isPasswordMatched)
+    return next(new ErrorHandler("Old password do not match!", 400));
 
-  if (req.body.newPassword !== req.body.confirmPassword) return next(new ErrorHandler("Passwords do not match! try again", 400));
+  if (req.body.newPassword !== req.body.confirmPassword)
+    return next(new ErrorHandler("Passwords do not match! try again", 400));
 
   user.password = req.body.newPassword;
   await user.save();
-  
+
   sendToken(user, 200, res);
 });
 

@@ -14,7 +14,7 @@ const productSchema = new mongoose.Schema({
         required: [true, "Please enter product price"],
         maxlength: [0, "Price cannot exceed 8 digits"]
     },
-    rating: {
+    ratings: {
         type: Number,
         default: 0
     },
@@ -57,6 +57,11 @@ const productSchema = new mongoose.Schema({
             comment: {
                 type: String,
                 required: true
+            },
+            user: {
+                type: mongoose.Schema.ObjectId,
+                ref: "User",
+                required: true
             }
         }
     ],
@@ -70,5 +75,6 @@ const productSchema = new mongoose.Schema({
         required: true
     }
 });
+
 
 module.exports = mongoose.model("Product", productSchema);
