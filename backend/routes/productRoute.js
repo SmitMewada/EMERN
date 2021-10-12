@@ -29,6 +29,6 @@ router
   .route("/admin/product/:id")
   .delete(isAuthenticatedUser, authorizedRoles("ADMIN"), deleteProduct);
 
-// Note: Here we can chain up all the methods if the uer is same as in case of 3rd, 4th, 5th routes
+// Note: Here we can chain up all the methods if the user is same as in case of 3rd, 4th, 5th routes
 
 module.exports = router;
