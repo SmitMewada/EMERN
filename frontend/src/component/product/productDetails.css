@@ -1,0 +1,203 @@
+.productDetails {
+    width: 100vw;
+    max-width: 100%;
+    padding: 6vmax;
+    box-sizing: border-box;
+    display: flex;
+}
+
+.productDetails > div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.productDetails > div:last-child {
+    align-items: flex-start;
+}
+
+.carouselImage {
+    width: 25rem;
+}
+
+.detailsBlock-1 > h2 {
+    color: rgba(54, 54, 54);
+    font-size: 1.6vmax;
+    font-weight: 600;
+}
+
+.detailsBlock-1 > p {
+    color: rgba(54, 54, 54, 0.582);
+    font-size: 0.6vmax;
+    font-weight: 200;
+}
+
+.detailsBlock-2 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.205);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.205);
+    width: 70%;
+    padding: 1vmax 0;
+}
+
+.detailsBlock-2 > span {
+    color: rgba(54, 54, 54, 0.582);
+    font-size: 0.6vmax;
+    font-weight: 200;
+}
+
+.detailsBlock-3 {
+    width: 70%;
+}
+
+.detailsBlock-3 > h1 {
+    color: rgba(17, 17, 17, 0.795);
+    font-size: 1.8vmax;
+    font-weight: 400;
+    margin: 1vmax 0;
+}
+
+.detailsBlock-3-1 {
+    display: flex;
+    align-items: center;
+}
+
+.detailsBlock-3-1-1 > button {
+    background-color: rgba(0, 0, 0, 0.616);
+    padding: 0.5vmax;
+    cursor: pointer;
+    color: white;
+    transition: all .5s;
+    border: none;
+}
+.detailsBlock-3-1-1 > input {
+    border: none;
+    padding: 0.5vmax;
+    width: 1vmax;
+    text-align: center;
+    outline: none;
+    font-weight: 400;
+    font-size: 0.8vmax;
+    color: rgba(0, 0, 0, 0.74);
+    caret-color: transparent;
+}
+.detailsBlock-3-1 > button {
+    border: none;
+    cursor: pointer;
+    color: white;
+    transition: all 0.5s;
+    background-color: tomato;
+    font-weight: 500;
+    font-size: 0.7vmax;
+    border-radius: 20px;
+    padding: 0.7vmax 2vmax;
+    margin: 1vmax;
+    outline: none;
+}
+
+.detailsBlock-3-1 > button:hover {
+    background-color: rgba(214, 84, 61);
+}
+
+.detailsBlock-3 > p{
+    border-top: 1px solid rgba(0, 0, 0, 0.205);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.205);
+    padding: 1vmax 0;
+}
+
+.detailsBlock-4 {
+    color: rgba(0, 0, 0, 0.700);
+    font-weight: 500;
+    font-size: 1.2vmax;
+}
+
+.detailsBlock-4 > P {
+    color: rgba(0, 0, 0, 0.534);
+    font-weight: 300;
+    font-size: 0.8vmax;
+}
+
+.submitReview {
+    border: none;
+    background-color: tomato;
+    font-weight: 500;
+    font-size: 0.7vmax;
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 0.7vmax 2vmax;
+    color: white;
+    outline: none;
+    transition: all .5s;
+}
+
+.submitReview:hover {
+    background-color: rgba(214, 84, 61);
+    transform: scale(1.1);
+}
+
+@media screen and (max-width: 600px){
+    .productDetails {
+        flex-direction: column;
+        height: unset;
+    }
+    .carouselImage {
+        width: 21rem;
+    }
+
+    .detailsBlock-1, .detailsBlock-2, .detailsBlock-3, .detailsBlock-4 {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .detailsBlock-1 > h2 {
+        font-size: 2.8vmax;
+        text-align: center;
+    }
+
+    .detailsBlock-1 > p {
+        text-align: center;
+        font-size: 1vmax;
+    }
+
+    .detailsBlock-2 > span {
+        font-size: 1.5vmax;
+    }
+
+    .detailsBlock-3 > h1 {
+        font-weight: 700;
+        font-size: 3vmax;
+        text-align: center;
+    }
+
+    .detailsBlock-3-1 {
+        flex-direction: column;
+    }
+
+    .detailsBlock-3-1-1 {
+        padding: 2vmax 0;
+    }
+
+    .detailsBlock-3-1-1 > button {
+        padding: 1.2vmax;
+        width: 4vmax;
+    }
+
+    .detailsBlock-3-1-1 > input {
+        padding: 1.5vmax;
+        width: 3vmax;
+        font-weight: 400;
+        font-size: 1.8vmax;
+    }
+
+    .detailsBlock-3-1 > button:last-child {
+        font-weight: 500;
+        font-size: 1.7vmax;
+        padding: 1.5vmax;
+        width: 20vmax;
+        margin: 3vmax 0;
+    }
+}
