@@ -11,7 +11,7 @@ import { useAlert } from "react-alert";
 const Home = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
-  const { loading, error, products } = useSelector((state) => state.products);
+  const { loading, error, data } = useSelector((state) => state.products);
 
   useEffect(() => {
     if (error) return alert.error(error);
@@ -41,8 +41,8 @@ const Home = () => {
         {loading ? (
           <Loader />
         ) : (
-          products &&
-          products.map((product) => <Product product={product} key={product._id}></Product>)
+          data.products &&
+          data.products.map((product) => <Product product={product} key={product._id}></Product>)
         )}
       </div>
     </Fragment>

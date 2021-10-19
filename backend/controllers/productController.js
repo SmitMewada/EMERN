@@ -35,8 +35,8 @@ exports.deleteReview = catchAsyncErros(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    message: `Review deleted successfully for the ${product.name}`
-  })
+    message: `Review deleted successfully for the ${product.name}`,
+  });
 });
 
 // Get all reviews of single product
@@ -61,7 +61,7 @@ exports.createProductReview = catchAsyncErros(async (req, res, next) => {
   };
 
   const product = await Product.findById(productID);
-  
+
   const isReviewed = product.reviews.find(
     (rev) => rev.user.toString() === req.user.id.toString()
   );
@@ -172,10 +172,11 @@ exports.getAllProducts = catchAsyncErros(async (req, res, next) => {
     .pagination(resultsPerPage);
 
   const products = await apiFeature.query;
- 
+
   res.status(200).json({
     success: true,
     products,
     productsCount,
+    resultsPerPage,
   });
 });

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useAlert } from "react-alert";
 import Carousel from "react-material-ui-carousel";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +9,8 @@ import Loader from "../layout/loader/Loader";
 import ReviewCard from "./ReviewCard.js";
 
 const ProductDetails = ({ match }) => {
+  const [qty, setQty] = useState(0);
+
   const dispatch = useDispatch();
   const alert = useAlert();
   const { loading, error, product } = useSelector(
@@ -71,7 +73,7 @@ const ProductDetails = ({ match }) => {
                 <div className="detailsBlock-3-1">
                   <div className="detailsBlock-3-1-1">
                     <button>-</button>
-                    <input type="number" value="1" />
+                    <input type="number" value={qty} onChange={(e) => setQty(e.target.value)} />
                     <button>+</button>
                   </div>
                   <button>Add to cart</button>
@@ -96,7 +98,7 @@ const ProductDetails = ({ match }) => {
           {product.reviews && product.reviews[0] ? (
             <div className="reviews">
               {product.reviews &&
-                product.reviews.map((review) => <ReviewCard review={review} />)}
+                product.reviews.map((review) => <ReviewCard review={review} key={review._id} />)}
             </div>
           ) : (
             <p className="noReviews">No reviews yet!</p>
