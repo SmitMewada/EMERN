@@ -42,7 +42,7 @@ const Home = () => {
           <Loader />
         ) : (
           products &&
-          products.map((product) => <Product product={product}></Product>)
+          products.map((product) => <Product product={product} key={product._id}></Product>)
         )}
       </div>
     </Fragment>

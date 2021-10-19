@@ -9,27 +9,30 @@ import {
   PRODUCT_DETAILS_SUCCESS,
 } from "../constants/productConstants";
 
-export const getProducts = () => async (dispatch) => {
-  try {
-    dispatch({
-      type: ALL_PRODUCT_REQUEST,
-    });
+export const getProducts =
+  (keyword = "") =>
+  async (dispatch) => {
+    try {
+      dispatch({
+        type: ALL_PRODUCT_REQUEST,
+      });
 
-    const data = await axios.get("http://localhost:4000/api/v1/products");
+      let link = `http://localhost:4000/api/v1/products?keyword=${keyword}`;
+      const data = await axios.get(link);
 
-    dispatch({
-      type: ALL_PRODUCT_SUCCESS,
-      payload: data.data.products,
-    });
-  } catch (error) {
-    dispatch({
-      type: ALL_PRODUCT_FAIL,
-      payload: error.response
-        ? error.response.data.message
-        : "Unable to connect with server! please try again later.",
-    });
-  }
-};
+      dispatch({
+        type: ALL_PRODUCT_SUCCESS,
+        payload: data.data.products,
+      });
+    } catch (error) {
+      dispatch({
+        type: ALL_PRODUCT_FAIL,
+        payload: error.response
+          ? error.response.data.message
+          : "Unable to connect with server! please try again later.",
+      });
+    }
+  };
 
 export const getProductDetails = (productID) => async (dispatch) => {
   try {
