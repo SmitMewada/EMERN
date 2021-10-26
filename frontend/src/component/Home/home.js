@@ -41,7 +41,7 @@ const Home = () => {
         {loading ? (
           <Loader />
         ) : (
-          data.products &&
+          data &&
           data.products.map((product) => <Product product={product} key={product._id}></Product>)
         )}
       </div>

@@ -2,6 +2,7 @@ class ApiFeatures {
   constructor(query, queryStr) {
     this.query = query;
     this.queryStr = queryStr;
+    this.filterQuery = {}
   }
 
   pagination(resultsPerPage) {
@@ -9,8 +10,10 @@ class ApiFeatures {
     const skip = resultsPerPage * (currentPage - 1);
 
     this.query = this.query.limit(resultsPerPage).skip(skip);
+    this.filterQuery = this.query.limit(resultsPerPage).skip(skip).clone();
     return this;
   }
+
 
   filter() {
     const queryCopy = { ...this.queryStr };
