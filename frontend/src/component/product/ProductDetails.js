@@ -7,6 +7,7 @@ import ReactStars from "react-rating-stars-component";
 import "./productDetails.css";
 import Loader from "../layout/loader/Loader";
 import ReviewCard from "./ReviewCard.js";
+import MetaData from "../layout/MetaData";
 
 const ProductDetails = ({ match }) => {
   const [qty, setQty] = useState(0);
@@ -40,6 +41,7 @@ const ProductDetails = ({ match }) => {
         <Loader />
       ) : (
         <Fragment>
+          <MetaData title={`${product.name} Premium Merch.`}/>
           <div className="productDetails">
             <div>
               {

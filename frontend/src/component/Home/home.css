@@ -80,6 +80,7 @@
     margin: 2vmax;
     transition: all .5s;
     padding-bottom: 0.5vmax;
+    height: 25rem;
 }
 
 .productCard > img {

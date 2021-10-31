@@ -8,6 +8,7 @@ import Pagination from "react-js-pagination";
 import Slider from "@material-ui/core/Slider";
 import Typography from "@material-ui/core/Typography";
 import "./Products.css";
+import MetaData from "../layout/MetaData";
 
 const categories = ["All", "Tshirt", "Laptop", "Footwear", "Shirt", "Tops", "Attire"];
 const Products = (props) => {
@@ -42,6 +43,7 @@ const Products = (props) => {
 
   return (
     <Fragment>
+      <MetaData title="Products - Premium Merch."/>
       {loading ? (
         <Loader />
       ) : (
