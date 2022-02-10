@@ -3,11 +3,15 @@ import {
   LOGIN_FAIL,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
+  SIGNUP_FAIL,
+  SIGNUP_REQUEST,
+  SIGNUP_SUCCESS,
 } from "../constants/userConstants";
 
 export const userReducer = (state = { user: {} }, action) => {
   switch (action.type) {
     case LOGIN_REQUEST:
+    case SIGNUP_REQUEST:
       return {
         ...state,
         loading: true,
@@ -15,6 +19,7 @@ export const userReducer = (state = { user: {} }, action) => {
       };
 
     case LOGIN_SUCCESS:
+    case SIGNUP_SUCCESS:
       return {
         ...state,
         isAthenticated: true,
@@ -23,6 +28,7 @@ export const userReducer = (state = { user: {} }, action) => {
       };
 
     case LOGIN_FAIL:
+    case SIGNUP_FAIL:
       return {
         ...state,
         loading: false,

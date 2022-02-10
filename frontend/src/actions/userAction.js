@@ -10,7 +10,7 @@ import {
 export const login = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: LOGIN_REQUEST });
-    
+
     const config = { headers: { "Content-Type": "application/json" } };
     const { data } = await axios.post(
       `http://localhost:4000/api/v1/login`,
@@ -25,26 +25,29 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 export const signup = (formData) => async (dispatch) => {
-    try {
-        const userDetails = { 
-            name: formData.get("name"),
-            email: formData.get("email"),
-            password: formData.get("password")
-        };
-        
-        dispatch({type: SIGNUP_REQUEST});
+  try {
+    const userDetails = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      password: formData.get("password"),
+      avatar: formData.get("avatar")
+    };
 
-        const config = { headers: { "Content-Type": "application/json" } };
 
-        const { data } = await axios.post(`http://localhost:4000/api/v1/register`, userDetails, config);
+    dispatch({ type: SIGNUP_REQUEST });
 
-        console.log(data)
+    const config = { headers: { "Content-Type": "multipart/form-data" } };
 
-        dispatch({type: SIGNUP_SUCCESS, payload: data});
+    const { data } = await axios.post(
+      `http://localhost:4000/api/v1/register`,
+      userDetails,
+      config
+    );
 
-       
+    console.log(data);
 
-    } catch (err) {
-        dispatch({type: SIGNUP_REQUEST, error: err.response.data.message})
-    }
-}
+    dispatch({ type: SIGNUP_SUCCESS, payload: data });
+  } catch (err) {
+    dispatch({ type: SIGNUP_REQUEST, error: err.response.data.message });
+  }
+};

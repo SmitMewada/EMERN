@@ -4,7 +4,7 @@ const User = require("../models/userModel");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
-
+const cloudinary = require("cloudinary");
 
 // Get single user details for Admin
 exports.getUserDetailsAdmin = catchAsyncErros(async (req, res, next) => {
@@ -19,17 +19,18 @@ exports.getUserDetailsAdmin = catchAsyncErros(async (req, res, next) => {
 exports.deleteUser = catchAsyncErros(async (req, res, next) => {
   // We will remove cloudinary later
 
-  const user = await User.findById({_id: req.params.id});
+  const user = await User.findById({ _id: req.params.id });
 
-  if (!user) return next(new ErrorHandler(`User does not exist with given ID`, 404));
+  if (!user)
+    return next(new ErrorHandler(`User does not exist with given ID`, 404));
 
   await user.remove();
 
   res.status(200).json({
     success: true,
-    user
-  })
-})
+    user,
+  });
+});
 
 // Get all users
 exports.getAllUsers = catchAsyncErros(async (req, res, next) => {
@@ -182,7 +183,7 @@ exports.loginUser = catchAsyncErros(async (req, res, next) => {
   if (!email || !password)
     return next(new ErrorHandler("Please enter email and password!", 400));
 
-  const user = await User.findOne({ email }).select("+password"); // Here we are using select method because we have excluded password in the model for select
+  let user = await User.findOne({ email }).select("+password"); // Here we are using select method because we have excluded password in the model for select
 
   if (!user) return next(new ErrorHandler("Invalid credentials!", 401));
 
@@ -191,22 +192,39 @@ exports.loginUser = catchAsyncErros(async (req, res, next) => {
   if (!isPasswordMatched)
     return next(new ErrorHandler("Invalid credentials!", 401));
 
+  user.password = undefined;
+
   sendToken(user, 200, res);
 });
 
 // Registering a user
 exports.registerUser = catchAsyncErros(async (req, res, next) => {
+
+  console.log(reqa)
+
+  // const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+  //   folder: "avatars",
+  //   width: 150,
+  //   crop: "scale",
+  // });
+
   const { name, email, password } = req.body;
+  
+  console.log(name, email, password)
 
-  const user = await User.create({
-    name,
-    email,
-    password,
-    avatar: {
-      publicID: "This is a sample ID",
-      url: "dummy url",
-    },
-  });
+  // const user = await User.create({
+  //   name,
+  //   email,
+  //   password,
+  //   avatar: {
+  //     publicID: "Sample ID",
+  //     url: "Sample URL",
+  //   },
+  // });
 
-  sendToken(user, 201, res);
+  // user.password = undefined;
+
+  // sendToken(user, 201, res);
+
+  res.status(200).json({"data": "testing"})
 });

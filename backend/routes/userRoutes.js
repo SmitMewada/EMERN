@@ -11,7 +11,7 @@ const {
   getAllUsers,
   getUserDetailsAdmin,
 } = require("../controllers/userController");
-const { isAuthenticatedUser, authorizedRoles } = require("../middlewares/auth");
+const { isAuthenticatedUser, authorizedRoles} = require("../middlewares/auth");
 const router = express.Router();
 
 router.route("/register").post(registerUser);
